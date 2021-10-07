@@ -1,0 +1,21 @@
+{
+  "name": "node_scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+
+  "type": "module",
+  
+  "scripts": {
+    "watch" : "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "owlBot92",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.22.0",
+    "cheerio": "^1.0.0-rc.10",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.13"
+  }
+}
