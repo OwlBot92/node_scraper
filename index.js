@@ -34,15 +34,22 @@ const sendRequest = async (array, priceSelector, titleSelector, victim) => {
 
         } catch (err) {
             errorCounter++;
-            console.log("BLOCKED REQUEST");
+            //console.log(`ERROR: ${err.status} ${err.statusText}`);
+            if (err.response) {
+                // client received an error response (5xx, 4xx)
+                console.log(err.response);
+            } else if (err.request) {
+                // client never received a response, or request never left
+                console.log(err.request);
+            } else {
+                // anything else
+                console.log('undefined error');
+            }
+            //console.log(err.statusText);
+            //console.log("BLOCKED REQUEST");
         }
     }
 
-    /* fs.writeFile('scrapedData.json', JSON.stringify(resultArray), (err)=>{
-        if (err) {
-            return console.log(err);
-        }
-    }) */
 
     console.log(`\nSCRAPING ${victim}...`);
     console.log("Comunication errors: ", errorCounter);
@@ -51,7 +58,7 @@ const sendRequest = async (array, priceSelector, titleSelector, victim) => {
 
 
 const multipleRequestHandler = () => {
-    sendRequest(URLs_obj.amazon_urls, "#priceblock_ourprice", "#productTitle", "AMAZON");
+    //sendRequest(URLs_obj.amazon_urls, "#priceblock_ourprice", "#productTitle", "AMAZON");
     sendRequest(URLs_obj.euronics_urls, ".productDetails__price", ".productDetails__name", "EURONICS");
     sendRequest(URLs_obj.mediaworld_urls, ".price", ".product-name", "MEDIAWORLD");
     sendRequest(URLs_obj.nzxt_urls, '#product-price span', '.bg-yellow-300', 'NZXT')
